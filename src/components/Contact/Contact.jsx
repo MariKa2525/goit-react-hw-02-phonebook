@@ -1,12 +1,26 @@
-export const Contact = ({contacts}) => {
-    console.log(contacts)
-    return (
-      <>
-           <li>{contacts.name} {contacts.number}</li>
+import PropTypes from 'prop-types';
+import css from './Contact.module.css';
 
-        {/* <Text>Has job: {hasJob + ''}</Text>
-        <Btn onClick={() => deleteUser(id)}>Delete</Btn>
-        <Btn onClick={() => changeStatus(id)}>Change job status</Btn> */}
-      </>
-    );
-  };
+export const Contact = ({ name, number, id, deleteContact }) => {
+  return (
+    <>
+      <p>
+        {name}: {number}
+      </p>
+      <button
+        className={css.btn}
+        type="button"
+        onClick={() => deleteContact(id)}
+      >
+        Delete
+      </button>
+    </>
+  );
+};
+
+Contact.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+  deleteContact: PropTypes.func.isRequired,
+};

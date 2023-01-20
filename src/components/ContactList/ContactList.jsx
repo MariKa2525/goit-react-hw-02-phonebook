@@ -1,26 +1,32 @@
+import PropTypes from 'prop-types';
 import { Contact } from '../Contact/Contact';
+import css from './ContactList.module.css';
 
+export const ContactList = ({ contacts, deleteContact }) => {
+  return (
+    <ul className={css.list}>
+      {contacts.map(contact => {
+        return (
+          <li className={css.item} key={contact.id}>
+            <Contact
+              name={contact.name}
+              number={contact.number}
+              id={contact.id}
+              deleteContact={deleteContact}
+            />
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
 
-export const ContactList = ({ contacts }) => {
-    console.log(contacts)
-    return (
-      <ul>
-        <li>
-              <Contact
-                contacts={contacts}
-              />
-            </li>
-
-
-        {/* {contacts.map(item => {
-          return (
-            <li key={item.id}>
-              <Contact
-                contact={contacts}
-              />
-            </li>
-          );
-        })} */}
-      </ul>
-    );
-  };
+ContactList.propeTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+};
